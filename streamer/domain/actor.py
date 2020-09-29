@@ -32,17 +32,3 @@ class Actor:
 
     def check_if_this_actor_worked_with(self, colleague):
         return True if colleague in self.__colleagues else False
-
-
-class TestActorMethods:
-    def test_init(self):
-        actor = Actor("Brad Pitt")
-        actor1 = Actor("Angelina Jolie")
-        actor1.add_actor_colleague(actor)
-        assert actor1.check_if_this_actor_worked_with(actor) is True
-        assert actor.check_if_this_actor_worked_with(actor1) is True
-        assert repr(actor1) == "<Actor Angelina Jolie>"
-        actor2 = Actor("")
-        assert actor2.actor_full_name is None
-        actor3 = Actor(42)
-        assert actor3.actor_full_name is None

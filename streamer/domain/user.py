@@ -1,5 +1,5 @@
-from domainmodel.movie import Movie
-from domainmodel.review import Review
+from streamer.domain.movie import Movie
+from streamer.domain.review import Review
 
 
 class User:
@@ -70,24 +70,3 @@ class User:
     def add_review(self, review: Review):
         if review not in self.__reviews:
             self.__reviews.append(review)
-
-
-class TestUserMethods:
-    def test_watch_movie(self):
-        user = User('michael', 'pw123456')
-        movie = Movie('Call Me By Your Name', 2017)
-        movie.runtime_minutes = 127
-        user.watch_movie(movie)
-        assert user.time_spent_watching_movies_minutes == 127
-        assert len(user.watched_movies) == 1
-        user.add_review(Review(user.watched_movies[0], 'This was a great film', 9))
-        user.watch_movie(movie)
-        assert user.time_spent_watching_movies_minutes == 127 * 2
-        assert len(user.watched_movies) == 1
-
-    def test_hash(self):
-        user1 = User('MJ', '12345678')
-        user2 = User('BJ', '87654321')
-        user3 = User('MJ', '12345678')
-        assert hash(user1) != hash(user2)
-        assert hash(user1) == hash(user3)

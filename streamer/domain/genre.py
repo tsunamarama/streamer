@@ -22,13 +22,3 @@ class Genre:
 
     def __hash__(self):
         return hash(self.__genre_type)
-
-
-class TestGenreMethods:
-    def test_init(self):
-        genre1 = Genre("Horror")
-        assert repr(genre1) == "<Genre Horror>"
-        genre2 = Genre("")
-        assert genre2.genre_type is None
-        genre3 = Genre(42)
-        assert genre3.genre_type is None

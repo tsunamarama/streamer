@@ -1,9 +1,10 @@
 from datetime import datetime
-from domainmodel.movie import Movie
+from streamer.domain.movie import Movie
+from streamer.domain.user import User
 
 
 class Review:
-    def __init__(self, movie: Movie, review_text: str, rating: int):
+    def __init__(self, movie: Movie, review_text: str, rating: int, user: User):
         self.__movie = movie
         self.__review_text = review_text.strip()
         if 1 <= rating <= 10:
@@ -11,12 +12,14 @@ class Review:
         else:
             self.__rating = None
         self.__timestamp = datetime.now()
+        self.__user = user
 
     def __repr__(self):
         return f'<Review {self.__movie}, {self.__rating}>'
 
     def __eq__(self, other):
-        return (self.__movie, self.__review_text, self.__rating, self.__timestamp) == (other.__movie, other.__review_text, other.__rating, other.__timestamp)
+        return (self.__movie, self.__review_text, self.__rating, self.__timestamp) == \
+               (other.__movie, other.__review_text, other.__rating, other.__timestamp)
 
     @property
     def movie(self) -> Movie:
@@ -34,12 +37,6 @@ class Review:
     def timestamp(self) -> datetime:
         return self.__timestamp
 
-
-class TestReviewMethods:
-    def test_init(self):
-        review = Review(Movie('Call Me By Your Name', 2017), 'This was an excellent film', 9)
-        print(review.movie)
-        print(review.review_text)
-        print(review.rating)
-        print(review.timestamp)
-        print(review)
+    @property
+    def user(self) -> User:
+        return self.__user

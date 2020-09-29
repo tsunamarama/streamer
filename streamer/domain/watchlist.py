@@ -1,4 +1,4 @@
-from domainmodel.movie import Movie
+from streamer.domain.movie import Movie
 
 
 class WatchList:
@@ -37,8 +37,3 @@ class WatchList:
             return None
         else:
             return self.__watchlist[0]
-
-
-class TestWatchlistMethods:
-    def test_init(self):
-        pass
