@@ -1,13 +1,10 @@
-import itertools
 from streamer.domain.actor import Actor
 from streamer.domain.director import Director
 from streamer.domain.genre import Genre
 
 
 class Movie:
-    new_id = itertools.count()
-
-    def __init__(self, title: str, year: int):
+    def __init__(self, title: str, year: int, desc=None, director=None, mins=None, id=int()):
         if title == "" or type(title) is not str:
             self.__title = None
         else:
@@ -16,13 +13,13 @@ class Movie:
             self.__year = year
         else:
             self.__year = None
-        self.__description = None
-        self.__director = None
+        self.__description = desc
+        self.__director = director
         self.__actors = []
         self.__genres = []
-        self.__runtime_minutes = None
+        self.__runtime_minutes = mins
         self.__reviews = []
-        self.__id = next(Movie.new_id)
+        self.__id = id
 
     def __repr__(self):
         return f"<Movie {self.__title}, {self.__year}>"
@@ -66,7 +63,7 @@ class Movie:
             self.__description = description.strip()
 
     @property
-    def director(self) -> str:
+    def director(self) -> Director:
         return self.__director
 
     @director.setter

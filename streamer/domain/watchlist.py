@@ -5,12 +5,6 @@ class WatchList:
     def __init__(self):
         self.__watchlist = []
 
-    def __iter__(self):
-        pass
-
-    def __next__(self):
-        pass
-
     @property
     def watchlist(self) -> list:
         return self.__watchlist

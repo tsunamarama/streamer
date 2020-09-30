@@ -1,14 +1,18 @@
 from streamer.domain.movie import Movie
-from streamer.domain.review import Review
+from streamer.domain.watchlist import WatchList
 
 
 class User:
-    def __init__(self, user_name: str, password: str):
+    def __init__(self, user_name: str, password: str, first_name: str, last_name: str, user_id=int()):
+        self.__user_id = user_id
         self.__user_name = user_name.lower().strip()
         self.__password = password
+        self.__first_name = first_name
+        self.__last_name = last_name
         self.__watched_movies = []
         self.__reviews = []
         self.__time_spent_watching_movies_minutes = int()
+        self.__watchlist = WatchList()
 
     def __repr__(self):
         return f'<User {self.__user_name}>'
@@ -21,6 +25,10 @@ class User:
 
     def __hash__(self):
         return hash(self.__user_name)
+
+    @property
+    def user_id(self):
+        return self.__user_id
 
     @property
     def user_name(self) -> str:
@@ -62,11 +70,15 @@ class User:
     def time_spent_watching_movies_minutes(self, minutes: int):
         self.__time_spent_watching_movies_minutes = minutes
 
+    @property
+    def watchlist(self) -> WatchList:
+        return self.__watchlist
+
     def watch_movie(self, movie: Movie):
         if movie not in self.__watched_movies:
             self.__watched_movies.append(movie)
         self.__time_spent_watching_movies_minutes += movie.runtime_minutes
 
-    def add_review(self, review: Review):
+    def add_review(self, review):
         if review not in self.__reviews:
             self.__reviews.append(review)
