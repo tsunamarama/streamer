@@ -86,6 +86,15 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def get_movies(self) -> List[Movie]:
+        """
+        Returns a list of Movies from the repository.
+
+        :return: List[Movie]
+        """
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def get_movies_by_genre(self, genre: Genre) -> List[Movie]:
         """
         Returns a list of Movies that are of the target genre.

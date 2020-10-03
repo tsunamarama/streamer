@@ -13,6 +13,8 @@ class Review:
             self.__rating = None
         self.__timestamp = datetime.now()
         self.__user = user
+        user.add_review(self)
+        movie.add_review(self)
 
     def __repr__(self):
         return f'<Review {self.__movie}, {self.__rating}>'

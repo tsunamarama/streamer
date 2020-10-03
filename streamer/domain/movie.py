@@ -1,6 +1,7 @@
 from streamer.domain.actor import Actor
 from streamer.domain.director import Director
 from streamer.domain.genre import Genre
+from streamer.domain.review import Review
 
 
 class Movie:
@@ -120,3 +121,6 @@ class Movie:
     def remove_genre(self, genre: Genre):
         if type(genre) is Genre and genre in self.__genres:
             self.__genres.remove(genre)
+
+    def add_review(self, review: Review):
+        self.reviews.append(review)

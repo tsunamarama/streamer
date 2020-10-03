@@ -39,6 +39,9 @@ class MemoryRepository(AbstractRepository):
     def get_movie_by_title(self, title: str) -> Movie:
         return next((movie for movie in self.__movies if movie.title.lower() == title.lower()), None)
 
+    def get_movies(self) -> List[Movie]:
+        return list(self.__movies)
+
     def get_movies_by_genre(self, genre: Genre) -> List[Movie]:
         return [movie for movie in self.__movies if genre in movie.genres]
 

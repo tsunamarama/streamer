@@ -110,3 +110,9 @@ def test_add_review(test_repo):
     test_repo.add_review(review)
     assert review in test_repo.get_movie_reviews(movie)
 
+
+def test_get_movies(test_repo):
+    movies = test_repo.get_movies()
+    assert len(movies) == 1000
+
+
