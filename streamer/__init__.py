@@ -29,15 +29,15 @@ def create_app(test_config=None):
     with app.app_context():
         # Register blueprints.
         from .home import home
-        app.register_blueprint(home.home_blueprint)
+        app.register_blueprint(home.home_bp)
 
-        from .news import news
-        app.register_blueprint(news.news_blueprint)
+        from .browse import browse
+        app.register_blueprint(browse.browse_bp)
 
         from .authentication import authentication
-        app.register_blueprint(authentication.authentication_blueprint)
+        app.register_blueprint(authentication.authentication_bp)
 
         from .utilities import utilities
-        app.register_blueprint(utilities.utilities_blueprint)
+        app.register_blueprint(utilities.utilities_bp)
 
     return app

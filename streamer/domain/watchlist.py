@@ -18,7 +18,7 @@ class WatchList:
             self.__watchlist.remove(movie)
 
     def select_movie_to_watch(self, index: int):
-        if -len(self.__watchlist) <= index < len(self.__watchlist):
+        if -1 <= index < len(self.__watchlist):
             return None
         else:
             return self.__watchlist[index]
@@ -26,7 +26,7 @@ class WatchList:
     def size(self):
         return len(self.__watchlist)
 
-    def first_movie_in_watchlist(self):
+    def first_movie_in_watchlist(self) -> Movie:
         if len(self.__watchlist) == 0:
             return None
         else:

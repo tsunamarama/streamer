@@ -1,12 +1,13 @@
 import pytest
 
-from streamer.adapters.repository import AbstractRepository
-from streamer.domain.actor import Actor
-from streamer.domain.director import Director
-from streamer.domain.genre import Genre
-from streamer.domain.movie import Movie
-from streamer.domain.review import Review
-from streamer.domain.user import User
+# from streamer.adapters.repository import AbstractRepository
+# from streamer.domain.actor import Actor
+# from streamer.domain.director import Director
+# from streamer.domain.genre import Genre
+# from streamer.domain.movie import Movie
+# from streamer.domain.review import Review
+# from streamer.domain.user import User
+from streamer.domain.model import Genre, Movie, Review, User
 
 from streamer.adapters.repository import RepositoryException
 
@@ -16,21 +17,20 @@ def test_repository_add_user(test_repo):
         user_name='mjoh781@aucklanduni.ac.nz',
         password='cassia',
         first_name='Michael',
-        last_name='Johnson',
-        user_id=4
+        last_name='Johnson'
     )
     test_repo.add_user(user)
-    assert test_repo.get_user_by_id(4) is user
+    assert test_repo.get_user('mjoh781@aucklanduni.ac.nz') is user
 
 
 def test_repository_get_user_by_id(test_repo):
-    user = test_repo.get_user_by_id(1)
-    assert user.user_name == 'm.a.r.johnson@me.com'
+    user = test_repo.get_user('h.valentine@adhb.govt.nz')
+    assert user is test_repo.get_user_by_id(user.user_id)
 
 
 def test_repository_get_user(test_repo):
     user = test_repo.get_user('m.a.r.johnson@me.com')
-    assert user.user_id == 1
+    assert user.password == 'parisbutter'
 
 
 def test_repository_non_existent_user(test_repo):
@@ -41,8 +41,7 @@ def test_repository_non_existent_user(test_repo):
 def test_add_movie_get_by_title(test_repo):
     movie = Movie(
         title='Harry Potter and the Order of the Phoenix',
-        year=2007,
-        id=1001
+        year=2007
     )
     test_repo.add_movie(movie)
     assert test_repo.get_movie_by_title('Harry Potter and the Order of the Phoenix').title == movie.title
@@ -51,11 +50,10 @@ def test_add_movie_get_by_title(test_repo):
 def test_add_movie_get_by_id(test_repo):
     movie = Movie(
         title='Made-Up Movie',
-        year=1994,
-        id=1001
+        year=1994
     )
     test_repo.add_movie(movie)
-    assert test_repo.get_movie_by_id(1001) is movie
+    assert test_repo.get_movie_by_id(movie.movie_id) is movie
 
 
 def test_add_genre_get_genres(test_repo):
@@ -74,33 +72,33 @@ def test_get_movies_by_genre(test_repo):
 
 
 def test_get_movies_by_director(test_repo):
-    movie = test_repo.get_movie_by_id(1)
+    movie = test_repo.get_movie_by_title('Guardians of the Galaxy')
     director = movie.director
     movies = test_repo.get_movies_by_director(director)
     assert director == movies[2].director
 
 
 def test_get_movies_by_actor(test_repo):
-    movie = test_repo.get_movie_by_id(5)
+    movie = test_repo.get_movie_by_title('Twilight')
     actor = movie.actors[0]
     movies = test_repo.get_movies_by_actor(actor)
     assert actor in movies[5].actors
 
 
 def test_get_movies_by_id(test_repo):
-    movie = test_repo.get_movie_by_id(1)
+    movie = test_repo.get_movie_by_title('Guardians of the Galaxy')
     assert movie.title == 'Guardians of the Galaxy'
 
 
 def test_get_movie_reviews(test_repo):
-    movie = test_repo.get_movie_by_id(1)
+    movie = test_repo.get_movie_by_title('Guardians of the Galaxy')
     reviews = test_repo.get_movie_reviews(movie)
     assert len(reviews) is 2
 
 
 def test_add_review(test_repo):
-    user = test_repo.get_user_by_id(3)
-    movie = test_repo.get_movie_by_id(7)
+    user = test_repo.get_user('c.arthars@bne.com.au')
+    movie = test_repo.get_movie_by_title('Twilight')
     review = Review(
         movie=movie,
         review_text='What a lovely film. I would recommend to others.',

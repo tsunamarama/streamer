@@ -1,10 +1,11 @@
 from typing import List
 
 from streamer.adapters.repository import AbstractRepository
-from streamer.domain.movie import Movie
-from streamer.domain.genre import Genre
-from streamer.domain.review import Review
-from streamer.domain.actor import Actor
+# from streamer.domain.movie import Movie
+# from streamer.domain.genre import Genre
+# from streamer.domain.review import Review
+# from streamer.domain.actor import Actor
+from streamer.domain.model import Actor, Genre, Movie, Review
 
 
 class NonExistentMovieException(Exception):
@@ -39,33 +40,43 @@ def get_movie(movie_id: int, repo: AbstractRepository):
 
 
 def get_movies_by_genre(genre: Genre, repo: AbstractRepository):
-    pass
+    movies = repo.get_movies_by_genre(genre)
+    return movies_to_dict(movies)
 
 
 def get_movies_by_year(year: int, repo: AbstractRepository):
+    # not sure if needed
     pass
 
 
-def get_movies_by_id(id_list, repo: AbstractRepository):
-    pass
+def get_movies_by_id(id_list: list, repo: AbstractRepository):
+    movies = repo.get_movies_by_id(id_list)
+    return movies_to_dict(movies)
 
 
 def get_reviews_for_movie(movie_id: int, repo: AbstractRepository):
-    pass
+    movie = repo.get_movie_by_id(movie_id)
+    if movie is None:
+        raise NonExistentMovieException
+    return reviews_to_dict(movie.reviews)
 
 
 def movie_to_dict(movie: Movie):
     return {
-        'id': movie.id,
+        'id': movie.movie_id,
         'title': movie.title,
         'year': movie.year,
         'desc': movie.description,
         'director': movie.director,
         'actors': actors_to_dict(movie.actors),
         'genres': genres_to_dict(movie.genres),
-        'review': reviews_to_dict(movie.reviews),
+        'reviews': reviews_to_dict(movie.reviews),
         'runtime': movie.runtime_minutes
     }
+
+
+def movies_to_dict(movies: List[Movie]):
+    return [movie_to_dict(movie) for movie in movies]
 
 
 def actor_to_dict(actor: Actor):
@@ -80,7 +91,7 @@ def actors_to_dict(actors: List[Actor]):
 
 def genre_to_dict(genre: Genre):
     return {
-        'genre_type': genre.genre_type
+        'genre': genre.genre_type
     }
 
 

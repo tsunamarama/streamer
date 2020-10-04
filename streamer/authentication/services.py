@@ -1,7 +1,8 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from streamer.adapters.repository import AbstractRepository
-from streamer.domain.user import User
+# from streamer.domain.user import User
+from streamer.domain.model import User
 
 
 class NameNotUniqueException(Exception):
@@ -21,7 +22,7 @@ def add_user(user_name: str, password: str, first_name: str, last_name: str, rep
         raise NameNotUniqueException
     user_id = 0
     password_hash = generate_password_hash(password)
-    repo.add_user(User(user_name, password_hash, first_name, last_name, user_id))
+    repo.add_user(User(user_name, password_hash, first_name, last_name))
 
 
 def get_user(user_name: str, repo: AbstractRepository):

@@ -4,12 +4,13 @@ import csv
 import os
 
 from streamer.adapters.repository import AbstractRepository
-from streamer.domain.actor import Actor
-from streamer.domain.director import Director
-from streamer.domain.genre import Genre
-from streamer.domain.movie import Movie
-from streamer.domain.review import Review
-from streamer.domain.user import User
+# from streamer.domain.actor import Actor
+# from streamer.domain.director import Director
+# from streamer.domain.genre import Genre
+# from streamer.domain.movie import Movie
+# from streamer.domain.review import Review
+# from streamer.domain.user import User
+from streamer.domain.model import Actor, Director, Genre, Movie, Review, User
 
 
 class MemoryRepository(AbstractRepository):
@@ -34,7 +35,7 @@ class MemoryRepository(AbstractRepository):
         self.__movies.add(movie)
 
     def get_movie_by_id(self, movie_id: int) -> Movie:
-        return next((movie for movie in self.__movies if movie.id == movie_id), None)
+        return next((movie for movie in self.__movies if movie.movie_id == movie_id), None)
 
     def get_movie_by_title(self, title: str) -> Movie:
         return next((movie for movie in self.__movies if movie.title.lower() == title.lower()), None)
@@ -52,7 +53,7 @@ class MemoryRepository(AbstractRepository):
         return [movie for movie in self.__movies if director == movie.director]
 
     def get_movies_by_id(self, id_list: list) -> List[Movie]:
-        return [movie for movie in self.__movies if movie.id in id_list]
+        return [movie for movie in self.__movies if movie.movie_id in id_list]
 
     def add_review(self, review: Review):
         review.movie.reviews.append(review)
@@ -93,7 +94,7 @@ def load_movies(path: str, repo: MemoryRepository):
             desc=row[3],
             director=Director(row[4]),
             mins=int(row[7]),
-            id=int(row[0])
+            rank=int(row[0])
         )
         repo.add_movie(movie)
         repo.add_director(movie.director)
@@ -113,8 +114,7 @@ def load_users(path: str, repo: MemoryRepository):
             user_name=row[1],
             password=row[2],
             first_name=row[3],
-            last_name=row[4],
-            user_id=int(row[0])
+            last_name=row[4]
         )
         repo.add_user(user)
 
@@ -122,10 +122,10 @@ def load_users(path: str, repo: MemoryRepository):
 def load_reviews(path: str, repo: MemoryRepository):
     for row in read_datafile(os.path.join(path, 'reviews.csv')):
         review = Review(
-            movie=repo.get_movie_by_id(int(row[0])),
+            movie=repo.get_movie_by_title(row[0]),
             review_text=row[1],
             rating=int(row[2]),
-            user=repo.get_user_by_id(int(row[4]))
+            user=repo.get_user(row[4])
         )
         review.user.reviews.append(review)
         review.movie.reviews.append(review)

@@ -3,6 +3,7 @@ import random
 from streamer.adapters.repository import AbstractRepository
 from streamer.domain.movie import Movie
 from streamer.domain.genre import Genre
+# from streamer.domain.model import Genre, Movie
 from typing import List
 
 

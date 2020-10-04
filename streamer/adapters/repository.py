@@ -1,12 +1,13 @@
 import abc
 from typing import List
-from streamer.domain.actor import Actor
-from streamer.domain.director import Director
-from streamer.domain.genre import Genre
-from streamer.domain.movie import Movie
-from streamer.domain.review import Review
-from streamer.domain.user import User
-from streamer.domain.watchlist import WatchList
+# from streamer.domain.actor import Actor
+# from streamer.domain.director import Director
+# from streamer.domain.genre import Genre
+# from streamer.domain.movie import Movie
+# from streamer.domain.review import Review
+# from streamer.domain.user import User
+# from streamer.domain.watchlist import WatchList
+from streamer.domain.model import Actor, Director, Genre, Movie, Review, User, WatchList
 
 repo_instance = None
 
