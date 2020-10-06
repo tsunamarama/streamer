@@ -1,13 +1,6 @@
 import abc
 from typing import List
-# from streamer.domain.actor import Actor
-# from streamer.domain.director import Director
-# from streamer.domain.genre import Genre
-# from streamer.domain.movie import Movie
-# from streamer.domain.review import Review
-# from streamer.domain.user import User
-# from streamer.domain.watchlist import WatchList
-from streamer.domain.model import Actor, Director, Genre, Movie, Review, User, WatchList
+from streamer.domain.model import Actor, Director, Genre, Movie, Review, User
 
 repo_instance = None
 
@@ -139,6 +132,18 @@ class AbstractRepository(abc.ABC):
         If there are no matches, this method returns an empty list.
 
         :param id_list: list
+        :return: List[Movie]
+        """
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_movies_by_rank(self, rank_list: list) -> List[Movie]:
+        """
+        Returns a list of Movies, whose ranks match those in rank_list, from the repository.
+
+        If there are no matches, this method returns an empty list.
+
+        :param rank_list:
         :return: List[Movie]
         """
         raise NotImplementedError

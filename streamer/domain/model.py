@@ -107,6 +107,7 @@ class Movie:
         self.__reviews = []
         self.__rank = rank
         self.__movie_id = id(self)
+        self.__poster_url = ''
 
     def __repr__(self):
         return f"<Movie {self.__title}, {self.__year}>"
@@ -195,6 +196,14 @@ class Movie:
     @property
     def movie_id(self) -> int:
         return self.__movie_id
+
+    @property
+    def poster_url(self) -> str:
+        return self.__poster_url
+
+    @poster_url.setter
+    def poster_url(self, value):
+        self.__poster_url = value
 
     def add_actor(self, actor: Actor):
         if type(actor) is Actor and actor not in self.__actors:
@@ -291,6 +300,22 @@ class User:
     @password.setter
     def password(self, password: str):
         self.__password = password
+
+    @property
+    def first_name(self) -> str:
+        return self.__first_name
+
+    @first_name.setter
+    def first_name(self, first_name: str):
+        self.__first_name = first_name
+
+    @property
+    def last_name(self) -> str:
+        return self.__last_name
+
+    @last_name.setter
+    def last_name(self, last_name: str):
+        self.__last_name = last_name
 
     @property
     def watched_movies(self) -> list:

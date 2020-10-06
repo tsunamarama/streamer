@@ -131,7 +131,7 @@ def test_get_reviews_movie_without_reviews(test_repo):
 def test_get_movies_by_id(test_repo):
     movie_1 = test_repo.get_movie_by_title('Prometheus').movie_id
     movie_2 = test_repo.get_movie_by_title('Rogue One').movie_id
-    movie_3 = test_repo.get_movie_by_title('Twilight').movie_id
+    movie_3 = test_repo.get_movie_by_title('Moana').movie_id
     movie_4 = 11111111
     target_ids = [movie_1, movie_2, movie_3, movie_4]
     movies_as_dict = browse_services.get_movies_by_id(target_ids, test_repo)

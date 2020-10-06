@@ -4,12 +4,6 @@ import csv
 import os
 
 from streamer.adapters.repository import AbstractRepository
-# from streamer.domain.actor import Actor
-# from streamer.domain.director import Director
-# from streamer.domain.genre import Genre
-# from streamer.domain.movie import Movie
-# from streamer.domain.review import Review
-# from streamer.domain.user import User
 from streamer.domain.model import Actor, Director, Genre, Movie, Review, User
 
 
@@ -54,6 +48,9 @@ class MemoryRepository(AbstractRepository):
 
     def get_movies_by_id(self, id_list: list) -> List[Movie]:
         return [movie for movie in self.__movies if movie.movie_id in id_list]
+
+    def get_movies_by_rank(self, rank_list: list) -> List[Movie]:
+        return [movie for movie in self.__movies if movie.rank in rank_list]
 
     def add_review(self, review: Review):
         review.movie.reviews.append(review)

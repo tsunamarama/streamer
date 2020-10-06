@@ -1,10 +1,6 @@
 from typing import List
 
 from streamer.adapters.repository import AbstractRepository
-# from streamer.domain.movie import Movie
-# from streamer.domain.genre import Genre
-# from streamer.domain.review import Review
-# from streamer.domain.actor import Actor
 from streamer.domain.model import Actor, Genre, Movie, Review
 
 
@@ -15,7 +11,7 @@ class NonExistentMovieException(Exception):
 class UnknownUserException(Exception):
     pass
 
-
+"""
 def add_review(movie_id: int, review_text: str, rating: int, user_name: str, repo: AbstractRepository):
     movie = repo.get_movie_by_id(movie_id)
     if movie is None:
@@ -42,11 +38,6 @@ def get_movie(movie_id: int, repo: AbstractRepository):
 def get_movies_by_genre(genre: Genre, repo: AbstractRepository):
     movies = repo.get_movies_by_genre(genre)
     return movies_to_dict(movies)
-
-
-def get_movies_by_year(year: int, repo: AbstractRepository):
-    # not sure if needed
-    pass
 
 
 def get_movies_by_id(id_list: list, repo: AbstractRepository):
@@ -110,4 +101,4 @@ def review_to_dict(review: Review):
 
 
 def reviews_to_dict(reviews: List[Review]):
-    return [review_to_dict(review) for review in reviews]
+    return [review_to_dict(review) for review in reviews]"""

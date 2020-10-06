@@ -14,7 +14,7 @@ def create_app(test_config=None):
 
     # Configure the app from configuration-file settings.
     app.config.from_object('config.Config')
-    data_path = os.path.join('covid', 'adapters', 'data')
+    data_path = os.path.join('streamer', 'adapters', 'data')
 
     if test_config is not None:
         # Load test configuration, and override any configuration settings.
@@ -33,6 +33,9 @@ def create_app(test_config=None):
 
         from .browse import browse
         app.register_blueprint(browse.browse_bp)
+
+        from .movie import movie
+        app.register_blueprint(movie.movie_bp)
 
         from .authentication import authentication
         app.register_blueprint(authentication.authentication_bp)

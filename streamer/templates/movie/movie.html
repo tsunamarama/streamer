@@ -1,0 +1,49 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <img class="movie_img" src="{{movie.poster_url}}" alt="{{movie.title}}">
+        </div>
+        <div class="col">
+            <h1 class="mt-5">{{movie.title}}</h1>
+            <h4>Directed by {{movie.director.director_full_name}}</h4>
+            <p class="subtitle">{{movie.year}} |
+            {% for genre in movie.genres %}
+            {{genre.genre}} |
+            {% endfor %}
+            {{movie.runtime}} minutes
+            </p>
+            <p>{{movie.desc}}</p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h1 class="mt-5">Cast</h1>
+            <p class="subtitle">
+            {% for actor in movie.actors %}
+            {{actor.name}} |
+            {% endfor %}
+            </p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h1 class="mt-5">Reviews</h1>
+            {% if reviews|length!=0 %}
+            {% for review in reviews %}
+            <h4>A review by {{review.user.user_name}}</h4>
+            <p class="subtitle">Written by {{review.user.first_name}} {{review.user.last_name}} on {{review.timestamp}}</p>
+            <p  >{{review.rating}} out of 10</p>
+            <p>{{review.review_text}}</p>
+            {% endfor %}
+            {% else %}
+            <p class="subtitle">No reviews for this movie</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

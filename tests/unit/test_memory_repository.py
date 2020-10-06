@@ -75,19 +75,28 @@ def test_get_movies_by_director(test_repo):
     movie = test_repo.get_movie_by_title('Guardians of the Galaxy')
     director = movie.director
     movies = test_repo.get_movies_by_director(director)
-    assert director == movies[2].director
+    assert director == movies[0].director
 
 
 def test_get_movies_by_actor(test_repo):
-    movie = test_repo.get_movie_by_title('Twilight')
+    movie = test_repo.get_movie_by_title('Rogue One')
     actor = movie.actors[0]
     movies = test_repo.get_movies_by_actor(actor)
-    assert actor in movies[5].actors
+    assert actor in movies[0].actors
 
 
 def test_get_movies_by_id(test_repo):
     movie = test_repo.get_movie_by_title('Guardians of the Galaxy')
+    movie_id = movie.movie_id
+    movie = test_repo.get_movie_by_id(movie_id)
     assert movie.title == 'Guardians of the Galaxy'
+
+
+def test_get_movies_by_rank(test_repo):
+    rank_list = [1, 2, 3]
+    movies = test_repo.get_movies_by_rank(rank_list)
+    movies.sort()
+    assert movies[0].title == 'Guardians of the Galaxy'
 
 
 def test_get_movie_reviews(test_repo):
@@ -98,7 +107,7 @@ def test_get_movie_reviews(test_repo):
 
 def test_add_review(test_repo):
     user = test_repo.get_user('c.arthars@bne.com.au')
-    movie = test_repo.get_movie_by_title('Twilight')
+    movie = test_repo.get_movie_by_title('Lion')
     review = Review(
         movie=movie,
         review_text='What a lovely film. I would recommend to others.',
@@ -111,6 +120,9 @@ def test_add_review(test_repo):
 
 def test_get_movies(test_repo):
     movies = test_repo.get_movies()
-    assert len(movies) == 1000
+    assert len(movies) == 25
 
 
+def test_get_movie_by_id(test_repo):
+    movie_id = test_repo.get_movie_by_title('Guardians of the Galaxy').movie_id
+    assert test_repo.get_movie_by_id(movie_id).title == 'Guardians of the Galaxy'
