@@ -1,5 +1,89 @@
 {% extends 'layout.html' %} {% block content %}
-<div class="container-fluid">
-    <h1 class="mt-5">Browse</h1>
+<div class="container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                <h1 class="mt-5"></h1>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    Genres
+                    </button>
+                    <div class="dropdown-menu">
+                        {% for label in genre_labels %}
+                        <a class="dropdown-item" href="{{ label.url }}">{{ label.genre }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <h1 class="mt-5"></h1>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    Actors
+                    </button>
+                    <div id="actors-dropdown" class="dropdown-menu dropdown-scroll">
+                        <input type="text" placeholder="Search actors..." id="actors-input" onkeyup="actorFilterFunction()">
+                        {% for label in actor_labels %}
+                        <a class="dropdown-item" href="{{ label.url }}">{{ label.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <h1 class="mt-5"></h1>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    Directors
+                    </button>
+                    <div id="directors-dropdown" class="dropdown-menu dropdown-scroll">
+                        <input type="text" placeholder="Search directors..." id="directors-input" onkeyup="directorFilterFunction()">
+                        {% for label in director_labels %}
+                        <a class="dropdown-item" href="{{ label.url }}">{{ label.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <h1 class="mt-5"></h1>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    Movies
+                    </button>
+                    <div id="movies-dropdown" class="dropdown-menu dropdown-scroll">
+                        <input type="text" placeholder="Search movies..." id="movies-input" onkeyup="movieFilterFunction()">
+                        {% for label in movie_labels %}
+                        <a class="dropdown-item" href="{{ label.url }}">{{ label.title }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h1 class="mt-5">Browse</h1>
+                <p class="subtitle">{{ subtitle }}</p>
+            </div>
+            <!--<div class="col">
+                <h1 class="mt-5"></h1>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </div>-->
+        </div>
+        <div class="row">
+        {% for movie in movies %}
+            <div class="col-sm-4">
+                <a href="{{ movie.url }}">
+                    <img class="browse_movie_img" src="{{ movie.poster_url }}" alt="{{ movie.title }}">
+                </a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
 </div>
 {% endblock %}

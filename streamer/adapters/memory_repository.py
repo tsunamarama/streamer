@@ -52,6 +52,15 @@ class MemoryRepository(AbstractRepository):
     def get_movies_by_rank(self, rank_list: list) -> List[Movie]:
         return [movie for movie in self.__movies if movie.rank in rank_list]
 
+    def get_genre_by_id(self, genre_id: int) -> Genre:
+        return next((genre for genre in self.__genres if genre.genre_id == genre_id), None)
+
+    def get_director_by_id(self, director_id: int) -> Genre:
+        return next((director for director in self.__directors if director.director_id == director_id), None)
+
+    def get_actor_by_id(self, actor_id: int) -> Genre:
+        return next((actor for actor in self.__actors if actor.actor_id == actor_id), None)
+
     def add_review(self, review: Review):
         review.movie.reviews.append(review)
         review.user.reviews.append(review)
@@ -73,6 +82,12 @@ class MemoryRepository(AbstractRepository):
     def get_genres(self) -> List[Genre]:
         return [genre for genre in self.__genres]
 
+    def get_actors(self) -> List[Actor]:
+        return [actor for actor in self.__actors]
+
+    def get_directors(self) -> List[Director]:
+        return [director for director in self.__directors]
+
 
 def read_datafile(filename: str):
     with open(filename, encoding='utf-8-sig') as file:
@@ -85,11 +100,12 @@ def read_datafile(filename: str):
 
 def load_movies(path: str, repo: MemoryRepository):
     for row in read_datafile(os.path.join(path, 'movies.csv')):
+        new_director = Director(row[4].strip())
         movie = Movie(
             title=row[1],
             year=int(row[6]),
             desc=row[3],
-            director=Director(row[4]),
+            director=new_director,
             mins=int(row[7]),
             rank=int(row[0])
         )
@@ -129,7 +145,24 @@ def load_reviews(path: str, repo: MemoryRepository):
         repo.add_review(review)
 
 
+def set_links(repo: MemoryRepository):
+    movies = repo.get_movies()
+    for movie in movies:
+        genres = movie.genres
+        actors = movie.actors
+        director = movie.director
+        for genre in genres:
+            if movie.movie_id not in genre.movies:
+                genre.add_movie(movie.movie_id)
+        for actor in actors:
+            if movie.movie_id not in actor.movies:
+                actor.add_movie(movie.movie_id)
+        if movie.movie_id not in director.movies:
+            director.add_movie(movie.movie_id)
+
+
 def load_data(path: str, repo: MemoryRepository):
     load_users(path, repo)
     load_movies(path, repo)
     load_reviews(path, repo)
+    set_links(repo)

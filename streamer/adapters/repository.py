@@ -149,6 +149,42 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def get_genre_by_id(self, genre_id: int) -> Genre:
+        """
+        Returns a Genre object for a given genre_id
+
+        If there is no associated Genre for the given genre_id, this method returns None.
+
+        :param genre_id: int
+        :return: Genre
+        """
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_director_by_id(self, director_id: int) -> Director:
+        """
+        Returns a Director object for a given director_id
+
+        If there is no associated Director for the given director_id, this method returns None.
+
+        :param director_id: int
+        :return: Director
+        """
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_actor_by_id(self, actor_id: int) -> Actor:
+        """
+        Returns a Actor object for a given actor_id
+
+        If there is no associated Actor for the given actor_id, this method returns None.
+
+        :param actor_id: int
+        :return: Actor
+        """
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def add_review(self, review: Review):
         """
         Adds a Review to the repository.
@@ -197,6 +233,24 @@ class AbstractRepository(abc.ABC):
         Adds a Genre to the repository.
 
         :param genre: Genre
+        """
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_actors(self) -> List[Actor]:
+        """
+        Returns a list containing all Actors in the repository.
+
+        :return: List[Actor]
+        """
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_directors(self) -> List[Director]:
+        """
+        Returns a list containing all Directors in the repository.
+
+        :return: List[Director]
         """
         raise NotImplementedError
 

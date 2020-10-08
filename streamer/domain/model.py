@@ -7,11 +7,21 @@ class Actor:
             self.__actor_full_name = None
         else:
             self.__actor_full_name = actor_full_name.strip()
+        self.__actor_id = id(self)
         self.__colleagues = []
+        self.__movies = []
 
     @property
     def actor_full_name(self) -> str:
         return self.__actor_full_name
+
+    @property
+    def actor_id(self) -> int:
+        return self.__actor_id
+
+    @property
+    def movies(self):
+        return self.__movies
 
     def __repr__(self):
         return f"<Actor {self.__actor_full_name}>"
@@ -33,6 +43,10 @@ class Actor:
         if self not in colleague.__colleagues:
             colleague.__colleagues.append(self)
 
+    def add_movie(self, movie):
+        if movie not in self.__movies:
+            self.__movies.append(movie)
+
     def check_if_this_actor_worked_with(self, colleague):
         return True if colleague in self.__colleagues else False
 
@@ -43,10 +57,20 @@ class Director:
             self.__director_full_name = None
         else:
             self.__director_full_name = director_full_name.strip()
+        self.__director_id = id(self)
+        self.__movies = []
 
     @property
     def director_full_name(self) -> str:
         return self.__director_full_name
+
+    @property
+    def director_id(self) -> int:
+        return self.__director_id
+
+    @property
+    def movies(self):
+        return self.__movies
 
     def __repr__(self):
         return f"<Director {self.__director_full_name}>"
@@ -62,6 +86,10 @@ class Director:
     def __hash__(self):
         return hash(self.__director_full_name)
 
+    def add_movie(self, movie):
+        if movie not in self.__movies:
+            self.__movies.append(movie)
+
 
 class Genre:
     def __init__(self, genre_type: str):
@@ -69,10 +97,20 @@ class Genre:
             self.__genre_type = None
         else:
             self.__genre_type = genre_type.strip()
+        self.__genre_id = id(self)
+        self.__movies = []
 
     @property
     def genre_type(self) -> str:
         return self.__genre_type
+
+    @property
+    def genre_id(self) -> int:
+        return self.__genre_id
+
+    @property
+    def movies(self):
+        return self.__movies
 
     def __repr__(self):
         return f"<Genre {self.__genre_type}>"
@@ -87,6 +125,9 @@ class Genre:
 
     def __hash__(self):
         return hash(self.__genre_type)
+
+    def add_movie(self, movie):
+        self.__movies.append(movie)
 
 
 class Movie:

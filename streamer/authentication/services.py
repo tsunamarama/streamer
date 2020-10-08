@@ -2,6 +2,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from streamer.adapters.repository import AbstractRepository
 from streamer.domain.model import User
+import streamer.utilities.services as util_services
 
 
 class NameNotUniqueException(Exception):
@@ -27,14 +28,7 @@ def get_user(user_name: str, repo: AbstractRepository):
     user = repo.get_user(user_name)
     if user is None:
         raise UnknownUserException
-    return user_to_dict(user)
-
-
-def user_to_dict(user: User):
-    return {
-        'username': user.user_name,
-        'password': user.password
-    }
+    return util_services.user_to_dict(user)
 
 
 def auth_user(user_name: str, password: str, repo: AbstractRepository):

@@ -19,7 +19,7 @@ def register():
     user_name_not_unique = None
     if form.validate_on_submit():
         try:
-            services.add_user(form.user_name.data, form.password.data, form.first_name.data, form.last_name.data)
+            services.add_user(form.username.data, form.password.data, form.first_name.data, form.last_name.data, repo.repo_instance)
             return redirect(url_for('authentication_bp.login'))
         except services.NameNotUniqueException:
             user_name_not_unique = 'Your username is already taken'
@@ -28,8 +28,7 @@ def register():
         title='Register',
         form=form,
         username_error_message=user_name_not_unique,
-        handler_url=url_for('authentication_bp.register'),
-        selected_movies=utilities.get_selected_movies()
+        handler_url=url_for('authentication_bp.register')
     )
 
 
@@ -54,8 +53,7 @@ def login():
         title='Login',
         username_error_message=user_name_not_recognised,
         password_error_message=password_does_not_match_username,
-        form=form,
-        selected_articles=utilities.get_selected_movies(),
+        form=form
     )
 
 
@@ -93,7 +91,7 @@ class PasswordValid:
 
 
 class RegistrationForm(FlaskForm):
-    user_name = StringField('Username', [
+    username = StringField('Username', [
         DataRequired(message='Your username is required'),
         Length(min=3, message='Your username is too short')])
     password = PasswordField('Password', [

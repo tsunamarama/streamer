@@ -126,3 +126,10 @@ def test_get_movies(test_repo):
 def test_get_movie_by_id(test_repo):
     movie_id = test_repo.get_movie_by_title('Guardians of the Galaxy').movie_id
     assert test_repo.get_movie_by_id(movie_id).title == 'Guardians of the Galaxy'
+
+
+def test_get_genre_movie_list_len(test_repo):
+    genres = test_repo.get_genres()
+    genre = genres[0]
+    print(genre)
+    print(len(genre.movies))
