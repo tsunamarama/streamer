@@ -2,7 +2,21 @@
 {% block content %}
 <div class="container">
     <div class="container-fluid">
-        <h1 class="mt-5">{{ user.first_name }} {{ user.last_name}}'s watchlist</h1>
+        <h1 class="mt-5">Watchlist</h1>
+    </div>
+    <div class="container-fluid">
+        <div style="overflow-x: auto;" class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4">
+            {% for movie in selected_movies %}
+                <div class="col-6 home-carousel">
+                    <div class="card card-block">
+                        <a href="{{movie.url}}" class="stretched-link">
+                            <img class="card-img-top" src="{{movie.poster_url}}" alt="{{movie.title}}">
+                        </a>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}

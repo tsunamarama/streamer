@@ -16,14 +16,18 @@ def create_app(test_config=None):
     repo.repo_instance = MemoryRepository()
     load_data(data_path, repo.repo_instance)
     with app.app_context():
-        from .home import home
-        app.register_blueprint(home.home_bp)
-        from .browse import browse
-        app.register_blueprint(browse.browse_bp)
-        from .movie import movie
-        app.register_blueprint(movie.movie_bp)
         from .authentication import authentication
         app.register_blueprint(authentication.authentication_bp)
+        from .browse import browse
+        app.register_blueprint(browse.browse_bp)
+        from .home import home
+        app.register_blueprint(home.home_bp)
+        from .movie import movie
+        app.register_blueprint(movie.movie_bp)
+        from .review import review
+        app.register_blueprint(review.review_bp)
         from .utilities import utilities
         app.register_blueprint(utilities.utilities_bp)
+        from .watchlist import watchlist
+        app.register_blueprint(watchlist.watchlist_bp)
     return app

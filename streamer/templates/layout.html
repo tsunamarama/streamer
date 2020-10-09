@@ -18,12 +18,16 @@
     <script src="../static/js/main.js"></script>
 </head>
 <body>
-    {% include 'navigation.html' %}
-    {% block content %} {% endblock %}
+<div id="page-container">
+    <div id="content-wrap">
+        {% include 'navigation.html' %}
+        {% block content %} {% endblock %}
+    </div>
+    <footer id="footer">
+        {% include 'footer.html' %}
+    </footer>
+</div>
 </body>
-<footer>
-    {% include 'footer.html' %}
-</footer>
 </html>
 
 

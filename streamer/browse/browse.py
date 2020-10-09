@@ -73,6 +73,7 @@ def browse_by_director():
         movie_labels=services.get_movie_labels(repo.repo_instance)
     )
 
+
 """
 @browse_bp.route('/browse_by_movie', methods=['GET'])
 def browse_by_movie():

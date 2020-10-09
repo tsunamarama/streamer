@@ -25,14 +25,13 @@
         </div>
     </div>
     <div class="container-fluid">
-        {% if 'username' in session %}
         <div class="row">
             <div class="col">
-                <h4 class="mt-5">Write a review</h4>
-                
+                <h4 class="mt-5"></h4>
+                <a href="{{ submit_review_url }}" role="button" class="btn btn-primary">Submit a Review</a>
+                <a href="{{ add_to_watchlist_url }}" role="button" class="btn btn-primary">Add to Watchlist</a>
             </div>
         </div>
-        {% endif %}
         <div class="row">
             <div class="col">
                 <h4 class="mt-5">Reviews</h4>

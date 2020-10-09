@@ -140,8 +140,8 @@ def load_reviews(path: str, repo: MemoryRepository):
             rating=int(row[2]),
             user=repo.get_user(row[4])
         )
-        review.user.reviews.append(review)
-        review.movie.reviews.append(review)
+        # review.user.reviews.append(review)
+        # review.movie.reviews.append(review)
         repo.add_review(review)
 
 

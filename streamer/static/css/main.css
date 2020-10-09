@@ -60,10 +60,10 @@ h1{
 }
 
 .rating {
-	border: 1px solid royalblue;
+	border: 1px solid #007bff;
     border-radius: .25rem;
 	max-width: 8.5%;
-	background-color: royalblue;
+	background-color: #007bff;
 	color: white;
 	font-weight: bold;
 	margin-bottom: .75em;
@@ -79,19 +79,19 @@ h1{
 }
 
 #btn-genre {
-	background-color: royalblue;
-	border: 1px solid royalblue;
+	background-color: #007bff;
+	border: 1px solid #007bff;
 	color: white;
 	margin: .75em;
 }
 
 #btn-nav-search {
-	background-color: royalblue;
-	border: 1px solid royalblue;
+	background-color: #007bff;
+	border: 1px solid #007bff;
 }
 
 #home-jumbo {
-	background-color: royalblue;
+	background-color: #007bff;
 	color: white;
 }
 
@@ -103,4 +103,44 @@ h1{
   	padding: 14px 20px 12px 45px;
   	border: none;
   	border-bottom: 1px solid #ddd;
+}
+
+.text-box {
+
+}
+
+.footer {
+	left: 0;
+	bottom: 0;
+	margin-top: 1.75em;
+	padding-top: 1.75em;
+	padding-bottom: 1.75em;
+	width: 100%;
+	background-color: lightgrey;
+	color: white;
+	text-align: center;
+}
+
+.footer-img {
+	max-width: 8%;
+}
+
+.form-field-margin {
+	margin-bottom: 1.75em;
+}
+
+#page-container {
+  position: relative;
+  min-height: 91vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
+#footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 2.5rem;
 }
