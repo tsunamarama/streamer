@@ -11,7 +11,7 @@ A web application utilising that allows users to:
 * Add reviews for movies
 * Save movies to/remove movies from a personal watchlist
 
-##Screenshots
+## Screenshots
 
 <img src="screenshots/home.png" alt="home">
 <img src="screenshots/browse.png" alt="browse">
