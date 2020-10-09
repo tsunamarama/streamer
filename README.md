@@ -12,6 +12,7 @@ A web application utilising that allows users to:
 * Save movies to/remove movies from a personal watchlist
 
 ##Screenshots
+
 <img src="screenshots/home.png" alt="home">
 <img src="screenshots/browse.png" alt="browse">
 <img src="screenshots/movie.png" alt="movie">
