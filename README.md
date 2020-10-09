@@ -7,8 +7,15 @@ A web application utilising that allows users to:
 * Browse movies
 * Search movies by genres, actors, and directors
 * See reviews for movies
+* Create a login
 * Add reviews for movies
 * Save movies to/remove movies from a personal watchlist
+
+##Screenshots
+<img src="screenshots/home.png" alt="home">
+<img src="screenshots/browse.png" alt="browse">
+<img src="screenshots/movie.png" alt="movie">
+<img src="screenshots/watchlist.png" alt="watchlist">
 
 ## Installation
 
