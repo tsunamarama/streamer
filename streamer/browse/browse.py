@@ -44,8 +44,8 @@ def browse_by_genre():
 def browse_by_actor():
     actor_id = int(request.args.get('id'))
     movies = services.get_actor_movies(actor_id, repo.repo_instance)
-    for movie in movies:
-        movie['url'] = url_for('movie_bp.movie_by_id', id=movie['id'])
+    # for movie in movies:
+    #     movie['url'] = url_for('movie_bp.movie_by_id', id=movie['id'])
     return render_template(
         'browse/browse.html',
         movies=movies,
@@ -61,8 +61,8 @@ def browse_by_actor():
 def browse_by_director():
     director_id = int(request.args.get('id'))
     movies = services.get_director_movies(director_id, repo.repo_instance)
-    for movie in movies:
-        movie['url'] = url_for('movie_bp.movie_by_id', id=movie['id'])
+    # for movie in movies:
+    #     movie['url'] = url_for('movie_bp.movie_by_id', id=movie['id'])
     return render_template(
         'browse/browse.html',
         movies=movies,

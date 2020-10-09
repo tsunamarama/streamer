@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, session, url_for
 from flask_wtf import FlaskForm
 from streamer.authentication.authentication import login_required
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, Length, ValidationError
+from wtforms import StringField, SubmitField, DecimalField
+from wtforms.validators import DataRequired
 
 import streamer.utilities.utilities as utilities
 import streamer.movie.services as services
@@ -37,6 +37,6 @@ def submit_review():
 class ReviewForm(FlaskForm):
     review_text = StringField('Review', [
         DataRequired(message='You must enter a review')])
-    rating = StringField('Rating', [
+    rating = DecimalField('Rating', [
         DataRequired(message='A rating is required')])
     submit = SubmitField('Submit')

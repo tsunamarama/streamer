@@ -30,7 +30,7 @@ def test_repository_get_user_by_id(test_repo):
 
 def test_repository_get_user(test_repo):
     user = test_repo.get_user('m.a.r.johnson@me.com')
-    assert user.password == 'parisbutter'
+    assert user.password.startswith('pbkdf2:sha256:150000$')
 
 
 def test_repository_non_existent_user(test_repo):

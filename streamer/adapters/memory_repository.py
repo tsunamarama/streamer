@@ -1,4 +1,5 @@
 from typing import List
+from werkzeug.security import generate_password_hash
 
 import csv
 import os
@@ -123,9 +124,10 @@ def load_movies(path: str, repo: MemoryRepository):
 
 def load_users(path: str, repo: MemoryRepository):
     for row in read_datafile(os.path.join(path, 'users.csv')):
+        password_hash = generate_password_hash(row[2])
         user = User(
             user_name=row[1],
-            password=row[2],
+            password=password_hash,
             first_name=row[3],
             last_name=row[4]
         )
@@ -140,8 +142,6 @@ def load_reviews(path: str, repo: MemoryRepository):
             rating=int(row[2]),
             user=repo.get_user(row[4])
         )
-        # review.user.reviews.append(review)
-        # review.movie.reviews.append(review)
         repo.add_review(review)
 
 

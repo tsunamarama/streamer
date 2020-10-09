@@ -61,15 +61,15 @@ def test_add_review(test_repo):
         (dic['review_text'] for dic in reviews_as_dict if dic['review_text'] == review_text), None) is not None
 
 
-# def test_add_review_non_existent_movie(test_repo):
-#     with pytest.raises(NonExistentMovieException):
-#         movie_services.add_review(
-#             movie_id=11111111,
-#             review_text='This movie does not exist',
-#             rating=2,
-#             user_name='m.a.r.johnson@me.com',
-#             repo=test_repo
-#         )
+def test_add_review_non_existent_movie(test_repo):
+    with pytest.raises(NonExistentMovieException):
+        movie_services.add_review(
+            movie_id=11111111,
+            review_text='This movie does not exist',
+            rating=2,
+            user_name='m.a.r.johnson@me.com',
+            repo=test_repo
+        )
 
 
 def test_add_review_unknown_user(test_repo):
@@ -119,9 +119,9 @@ def test_get_movie(test_repo):
     # assert movie.reviews[0].user.user_name in reviews_user
 
 
-# def test_get_reviews_non_existent_movie(test_repo):
-#     with pytest.raises(NonExistentMovieException):
-#         print(movie_services.get_movie_reviews(11111111, test_repo))
+def test_get_reviews_non_existent_movie(test_repo):
+    with pytest.raises(NonExistentMovieException):
+        print(movie_services.get_movie_reviews(11111111, test_repo))
 
 
 def test_get_reviews_movie_without_reviews(test_repo):
@@ -146,6 +146,6 @@ def test_get_movies_by_id(test_repo):
 
 def test_get_movies_by_genre(test_repo):
     genres = test_repo.get_genres()
-    movies_as_dict = browse_services.get_movies_by_genre(genres[0], test_repo)
+    movies_as_dict = browse_services.get_genre_movies(genres[0], test_repo)
     movie_genres = [movie['genres'] for movie in movies_as_dict]
     assert any(movie['genre'] == genres[0].genre_type for movie in movie_genres[0])

@@ -78,6 +78,11 @@ h1{
 	margin: .25em;
 }
 
+#trash {
+	min-width: 200%;
+	align-content: center;
+}
+
 #btn-genre {
 	background-color: #007bff;
 	border: 1px solid #007bff;

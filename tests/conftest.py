@@ -31,7 +31,7 @@ class AuthManager:
     def __init__(self, client):
         self.__client = client
 
-    def login(self, user_name='', password=''):
+    def login(self, user_name='dawn@aucklanduni.ac.nz', password='Vicechancellor1'):
         return self.__client.post(
             'authentication/login',
             data={'username': user_name, 'password': password}

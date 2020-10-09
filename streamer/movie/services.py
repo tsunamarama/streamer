@@ -15,7 +15,9 @@ def get_movie_reviews(movie_id: int, repo: AbstractRepository):
     movie = repo.get_movie_by_id(movie_id)
     if movie is None:
         raise NonExistentMovieException
-    return util_services.reviews_to_dict(movie.reviews)
+    reviews = repo.get_movie_reviews(movie)
+    reviews.sort(reverse=True, key=lambda r: r.timestamp)
+    return util_services.reviews_to_dict(reviews)
 
 
 def get_movie_by_title(title: str, repo: AbstractRepository):
@@ -24,7 +26,10 @@ def get_movie_by_title(title: str, repo: AbstractRepository):
 
 def get_movie_reviews_by_title(title: str, repo: AbstractRepository):
     movie = repo.get_movie_by_title(title)
+    if movie is None:
+        raise NonExistentMovieException
     reviews = repo.get_movie_reviews(movie)
+    reviews.sort(reverse=True, key=lambda r: r.timestamp)
     return util_services.reviews_to_dict(reviews)
 
 
