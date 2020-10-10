@@ -31,8 +31,8 @@
                 <h4 class="mt-5">Write a review</h4>
                 <div class="form-wrapper">
                     <form action="{{handler_url}}" method="POST">
-                        {{ form.movie_id }} <!-- Need to include this hidden field as it tracks the article being commented. -->
-                        {{ form.csrf_token }} <!-- Need to include this token - Flask WTForms requires it. -->
+                        {{ form.movie_id }}
+                        {{ form.csrf_token }}
                         <br>
                         <div class ="form-field form-field-margin">
                             <h5>{{ form.review_text.label }}</h5>
@@ -47,7 +47,13 @@
                         </div>
                         <div class="form-field form-field-margin">
                             <h5>{{ form.rating.label }}</h5>
-                            {{ form.rating(type="text", class="form-control") }}
+                            <table>
+                                <tr>
+                                    <td><h5>1&nbsp;&nbsp;</h5></td>
+                                    <td>{{ form.rating(type="range", class="custom-range", min="1", max="10") }}</td>
+                                    <td><h5>&nbsp;&nbsp;10</h5></td>
+                                </tr>
+                            </table>
                         </div>
                         {{ form.submit(class="btn btn-primary") }}
                     </form>

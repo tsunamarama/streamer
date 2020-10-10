@@ -11,9 +11,11 @@ watchlist_bp = Blueprint('watchlist_bp', __name__)
 @watchlist_bp.route('/watchlist', methods=['GET'])
 def watchlist():
     movies = services.get_watchlist(session['username'], repo.repo_instance)
+    count = len(movies)
     return render_template(
         'watchlist/watchlist.html',
-        movies=movies
+        movies=movies,
+        count=count
     )
 
 

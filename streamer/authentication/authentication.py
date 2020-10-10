@@ -97,8 +97,10 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', [
         DataRequired(message='Your password is required'),
         PasswordValid()])
-    first_name = StringField('First name', [])
-    last_name = StringField('Last name', [])
+    first_name = StringField('First name', [
+        DataRequired(message='Your first name is required')])
+    last_name = StringField('Last name', [
+        DataRequired(message='Your last name is required')])
     submit = SubmitField('Register')
 
 

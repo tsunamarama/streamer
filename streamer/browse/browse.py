@@ -72,20 +72,3 @@ def browse_by_director():
         director_labels=services.get_director_labels(repo.repo_instance),
         movie_labels=services.get_movie_labels(repo.repo_instance)
     )
-
-
-"""
-@browse_bp.route('/browse_by_movie', methods=['GET'])
-def browse_by_movie():
-    movie_id = int(request.args.get('id'))
-    movie = util_services.get_movie(movie_id, repo.repo_instance)
-    movie['url'] = url_for('movie_bp.movie_by_id', id=movie['id'])
-    return render_template(
-        'browse/browse.html',
-        movies=movie,
-        subtitle=services.get_movie_subtitle(movie_id, repo.repo_instance),
-        genre_labels=services.get_genre_labels(repo.repo_instance),
-        actor_labels=services.get_actor_labels(repo.repo_instance),
-        director_labels=services.get_director_labels(repo.repo_instance),
-        movie_labels=services.get_movie_labels(repo.repo_instance)
-    )"""
