@@ -1,10 +1,9 @@
 from flask import Blueprint
-from flask import request, render_template, redirect, url_for, session
+from flask import request, render_template, url_for
 
 import streamer.adapters.repository as repo
 import streamer.utilities.utilities as utilities
 import streamer.browse.services as services
-import streamer.utilities.services as util_services
 
 
 browse_bp = Blueprint('browse_bp', __name__)
@@ -44,8 +43,6 @@ def browse_by_genre():
 def browse_by_actor():
     actor_id = int(request.args.get('id'))
     movies = services.get_actor_movies(actor_id, repo.repo_instance)
-    # for movie in movies:
-    #     movie['url'] = url_for('movie_bp.movie_by_id', id=movie['id'])
     return render_template(
         'browse/browse.html',
         movies=movies,
@@ -61,8 +58,6 @@ def browse_by_actor():
 def browse_by_director():
     director_id = int(request.args.get('id'))
     movies = services.get_director_movies(director_id, repo.repo_instance)
-    # for movie in movies:
-    #     movie['url'] = url_for('movie_bp.movie_by_id', id=movie['id'])
     return render_template(
         'browse/browse.html',
         movies=movies,

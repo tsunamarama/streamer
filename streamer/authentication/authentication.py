@@ -5,7 +5,6 @@ from wtforms.validators import DataRequired, Length, ValidationError
 from password_validator import PasswordValidator
 from functools import wraps
 
-import streamer.utilities.utilities as utilities
 import streamer.authentication.services as services
 import streamer.adapters.repository as repo
 
