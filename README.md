@@ -2,7 +2,7 @@
 
 ## Description
 
-A web application utilising that allows users to:
+A web application that allows users to:
 
 * Browse movies
 * Search movies by genres, actors, and directors
